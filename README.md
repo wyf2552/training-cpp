@@ -1,9 +1,9 @@
 ﻿# C++ 练习题
 
 
-> **NOTICE** 推荐阅读 [C++ 参考手册](https://zh.cppreference.com/w/cpp) 学习 C/C++ 语法和 STL 库。
-> **NOTICE** 本仓库的所有练习均使用 C++17 标准编写，因此请确保您的编译器支持 C++17 标准。
-> **NOTICE** 本仓库的所有练习均使用 xmake 构建，因此请确保您的 Linux 系统已安装 xmake。
+> **NOTICE** 推荐阅读 [C++ 参考手册](https://zh.cppreference.com/w/cpp) 学习 C/C++ 语法和 STL 库。  
+> **NOTICE** 本仓库的所有练习均使用 C++17 标准编写，因此请确保您的编译器支持 C++17 标准。  
+> **NOTICE** 本仓库的所有练习均使用 xmake 构建，因此请确保您的 Linux 系统已安装 xmake。  
 > **NOTICE** 推荐参加 [希加加训练营](https://lb3fn675fh.feishu.cn/docx/US2ld4BWooRKTLxwedycUCjdnmh)，全方位系统提升 C++ 编程能力。
 
 
