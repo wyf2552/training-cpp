@@ -34,14 +34,18 @@ namespace Conflict {
 
 int main(int argc, char **argv) {
     // 练习 1: 使用作用域解析运算符访问成员
-    ASSERT(MyNamespace::value == ?, "从 MyNamespace 访问 value");
-    ASSERT(MyNamespace::add(5, 3) == ?, "从 MyNamespace 调用 add 函数");
-
+    {
+        ASSERT(MyNamespace::value == ?, "从 MyNamespace 访问 value");
+        ASSERT(MyNamespace::add(5, 3) == ?, "从 MyNamespace 调用 add 函数");
+    }
+    
     // 练习 2: 使用 `using` 声明
-    using MyNamespace::value;
-    ASSERT(value == ?, "使用 using 声明后访问 value");
-    // ASSERT(add(1, 2) == 3, "如果没有 `using MyNamespace::add;` 或 `MyNamespace::`，这应该会失败"); // 取消注释测试一下
-
+    {
+        using MyNamespace::value;
+        ASSERT(value == ?, "使用 using 声明后访问 value");
+        // ASSERT(add(1, 2) == 3, "如果没有 `using MyNamespace::add;` 或 `MyNamespace::`，这应该会失败"); // 取消注释测试一下
+    }
+    
     // 练习 3: 使用 `using` 指令
     {
         using namespace MyNamespace;
