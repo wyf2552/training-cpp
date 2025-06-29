@@ -6,8 +6,15 @@ constexpr unsigned long long fibonacci(int i) {
             return 0;
         case 1:
             return 1;
-        default:
-            return fibonacci(i - 1) + fibonacci(i - 2);
+        default: {
+            unsigned long long a = 0, b = 1, c;
+            for (int j = 2; j <= i; ++j) {
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            return b;
+        }
     }
 }
 
