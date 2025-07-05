@@ -15,11 +15,20 @@ class Fibonacci {
 public:
     // TODO: 实现构造器
     // Fibonacci()
+    Fibonacci() : cache{0, 1}, cached(2) {}
 
     // TODO: 实现正确的缓存优化斐波那契计算
     size_t get(int i) {
-        for (; false; ++cached) {
-            cache[cached] = cache[cached - 1] + cache[cached - 2];
+        if (i >= 16) {
+            return 0; // 超出缓存范围
+        }
+
+        // 如果需要计算新的斐波那契数
+        if (i >= cached) {
+            for (int j = cached; j <= i; j++) {
+                cache[j] = cache[j - 1] + cache[j - 2];
+            }
+            cached = i + 1;
         }
         return cache[i];
     }
