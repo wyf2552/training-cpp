@@ -17,8 +17,10 @@ public:
 
     // TODO: 声明全局函数 `print_private_val` 为 A 的友元
     // TIPS: 在类定义内部使用 `friend` 关键字
+    friend void print_private_val(const A& a);
 
     // TODO: 声明类 B 为 A 的友元
+    friend class B;
 };
 
 // 全局函数，尝试访问 A 的私有成员
@@ -28,9 +30,15 @@ void print_private_val(const A& a) {
 }
 
 class B {
+private:
+    int b_private = 20;
+
 public:
     int access_private_val(const A& a) {
         return a.private_val;
+    }
+    int get_b_private() const {
+        return b_private;
     }
 };
 
@@ -43,15 +51,28 @@ int main(int argc, char **argv) {
 
     B b;
     int val_from_b = b.access_private_val(a);
-    ASSERT(val_from_b == ?, "Value accessed by friend class B should be 10");
+    ASSERT(val_from_b == 10, "Value accessed by friend class B should be 10");
     std::cout << "Value accessed by friend class B: " << val_from_b << std::endl;
 
     // THINK: 友元关系是单向的吗？ B 是 A 的友元，那么 A 是 B 的友元吗？
     //       尝试在 A 中访问 B 的私有成员（如果 B 有的话），看看是否可行。
     //       (可以在 B 中添加私有成员并尝试从 A 访问来验证)
+    std::cout << "Friend relationship is one-way: B can access A's private, but A cannot access B's private" << std::endl;
+
 
     // THINK: 友元关系可以继承吗？ 如果 C 继承自 B，C 是 A 的友元吗？
     //       尝试创建一个继承自 B 的类 C，并在 C 中访问 A 的私有成员，看看是否可行。
+    class C : public B {
+    public:
+        int access_a_private_from_c(const A& a) {
+            // 这会编译错误，因为友元关系不能继承
+            // return a.private_val; // 错误：C不是A的友元
+            return 0; // 需要注释掉上面的错误代码
+        }
+    };
+
+    C c;
+    std::cout << "Friend relationship is not inheritable: C cannot access A's private even though C inherits from B" << std::endl;
 
     return 0;
 }
