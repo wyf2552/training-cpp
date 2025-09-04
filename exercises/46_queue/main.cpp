@@ -19,30 +19,71 @@ template <typename T>
 class MyQueue {
 private:
     //?
+    std::deque<T> data;
 public:
     //?
+    void push(const T& value) {
+        data.push_back(value);
+    }
+
+    void pop() {
+        if (!empty()) {
+            data.pop_front();
+        }
+    }
+
+    T& front() {
+        return data.front();
+    }
+
+    const T& front() const {
+        return data.front();
+    }
+
+    T& back() {
+        return data.back();
+    }
+
+    const T& back() const {
+        return data.back();
+    }
+
+    bool empty() const {
+        return data.empty();
+    }
+
+    size_t size() const {
+        return data.size();
+    }
+
+    void clear() {
+        data.clear();
+    }
 };
 
 
 int main(int argc, char **argv) {
-    std::queue<std::string> q;
     // TODO：使用自己实现的队列类进行测试
     // MyQueue<std::string> q;
+    MyQueue<std::string> q;
     ASSERT(q.empty(), "queue should be empty initially");
     ASSERT(q.size() == 0, "queue size should be 0 initially");
 
     // TODO: 入队 "Hello"
+    q.push("Hello");
     ASSERT(!q.empty(), "queue should not be empty after push");
     ASSERT(q.size() == 1, "queue size should be 1 after push");
     ASSERT(q.front() == "Hello", "front element should be \"Hello\"");
     ASSERT(q.back() == "Hello", "back element should be \"Hello\"");
 
     // TODO: 入队 "World"
+    q.push("World");
     ASSERT(q.size() == 2, "queue size should be 2 after second push");
     ASSERT(q.front() == "Hello", "front element should still be \"Hello\"");
     ASSERT(q.back() == "World", "back element should be \"World\"");
 
     // TODO:  入队 "!"
+    q.push("!");
     ASSERT(q.size() == 3, "queue size should be 3 after third push");
     ASSERT(q.front() == "Hello", "front element should still be \"Hello\"");
     ASSERT(q.back() == "!", "back element should be \"!\"");
@@ -63,13 +104,21 @@ int main(int argc, char **argv) {
 
     // 继续出队
     q.pop(); // 出队 "!"
-    ASSERT(q.size() == ?, "queue size should be 1 after second pop");
-    ASSERT(q.front() == ?, "front element should be \"C++\"");
+    ASSERT(q.size() == 1, "queue size should be 1 after second pop");
+    ASSERT(q.front() == "C++", "front element should be \"C++\"");
     ASSERT(q.back() == "C++", "back element should be \"C++\"");
 
-    //TODO: 出队 "C++"
+    q.pop();
     ASSERT(q.empty(), "queue should be empty after final pop");
     ASSERT(q.size() == 0, "queue size should be 0 after final pop");
+
+    q.push("Test1");
+    q.push("Test2");
+    q.push("Test3");
+    ASSERT(q.size() == 3, "queue size should be 3 after pushing 3 elements");
+    q.clear();
+    ASSERT(q.empty(), "queue should be empty after clear");
+    ASSERT(q.size() == 0, "queue size should be 0 after clear");
 
     return 0;
 }
